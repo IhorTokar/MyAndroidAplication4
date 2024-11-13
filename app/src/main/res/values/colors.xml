@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="dark_background">#333333</color>
+    <color name="my_primary">#6200EE</color>
+    <color name="my_on_primary">#FFFFFF</color>
+    <color name="my_surface">#FFFFFF</color>
+    <color name="my_on_surface">#000000</color>
+</resources>

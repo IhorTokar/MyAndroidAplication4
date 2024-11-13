@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.MyAplicationLab3" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Define primary colors here -->
+        <item name="colorPrimary">@color/my_primary</item>
+        <item name="colorOnPrimary">@color/my_on_primary</item>
+        <item name="colorSurface">@color/my_surface</item>
+        <item name="colorOnSurface">@color/my_on_surface</item>
+    </style>
+
+    <!-- Light theme -->
+    <style name="AppTheme.Light" parent="Base.Theme.MyAplicationLab3">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Dark theme -->
+    <style name="AppTheme.Dark" parent="Base.Theme.MyAplicationLab3">
+        <item name="android:background">@color/dark_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Default theme that inherits from the base theme -->
+    <style name="Theme.MyAplicationLab3" parent="Base.Theme.MyAplicationLab3" />
+</resources>
