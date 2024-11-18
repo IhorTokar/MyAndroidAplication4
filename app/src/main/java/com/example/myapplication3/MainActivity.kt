@@ -1,5 +1,7 @@
 package com.example.myapplication3
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -21,6 +23,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlin.random.Random
+import com.example.myapplication3.RegistrationActivity
+import com.example.myapplication3.ResultActivity
 
 class MainActivity : AppCompatActivity() {
     private var textView: TextView? = null
@@ -40,6 +44,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mediumRadio: RadioButton
     private lateinit var hardRadio: RadioButton
     private var timerTextView: TextView? = null
+    private var BackToLoginBtn: Button? = null
+    private var RecordsBtn: Button? = null
 
     private var isDarkTheme = false
     private var score = 0
@@ -69,7 +75,8 @@ class MainActivity : AppCompatActivity() {
         infinityLivesCheckBox = findViewById(R.id.theme_checkBox)
         buttonEndGame = findViewById(R.id.buttonEndGame)
         timerTextView = findViewById(R.id.timer_count)
-
+        BackToLoginBtn = findViewById(R.id.BackToLoginBtn)
+        RecordsBtn = findViewById(R.id.RecorBtn)
         setupThemeSpinner()
         setupDifficultyRadioGroup()
         setTimerSpeedToggle()
@@ -86,6 +93,14 @@ class MainActivity : AppCompatActivity() {
         buttonStart?.setOnClickListener {
             startGame()
             buttonStart?.visibility = View.GONE
+        }
+        BackToLoginBtn?.setOnClickListener{
+            val intent = Intent(this, RegistrationActivity::class.java)
+            startActivity(intent)
+        }
+        RecordsBtn?.setOnClickListener {
+            val intent = Intent(this, ResultActivity::class.java)
+            startActivity(intent)
         }
 
         timer_timeTogle?.setTextOn("Швидкий режим")
@@ -210,6 +225,9 @@ class MainActivity : AppCompatActivity() {
     private fun resetGame() {
         score = 0
         setupDifficultyRadioGroup()
+        if(lives == 0){
+            lives = 3;
+        }
         scoreTextView?.text = "Рекорд: $score"
         livesTextView?.text = "Життя: $lives"
         buttonStart?.visibility = View.VISIBLE
@@ -262,7 +280,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showGameOverMessage() {
-        Toast.makeText(this, "Кінець гри! Рекорд: $score", Toast.LENGTH_LONG).show()
+        // Отримуємо поточного користувача
+        val sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val userName = sharedPreferences.getString("userName", null)
+        val gmail = sharedPreferences.getString("gmail", null)
+
+        if (userName != null && gmail != null) {
+            // Зберігаємо рекорд у SharedPreferences
+            val recordsPreferences = getSharedPreferences("UserRecords", Context.MODE_PRIVATE)
+            val editor = recordsPreferences.edit()
+
+            val currentHighScore = recordsPreferences.getInt(userName, 0)
+            if (score > currentHighScore) {
+                editor.putInt(userName, score)
+                editor.apply()
+                Toast.makeText(this, "Новий рекорд для $userName: $score", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Кінець гри! Ваш рекорд: $currentHighScore, Ваш результат: $score", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Toast.makeText(this, "Користувач не залогінився!", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getColorIndex(colorName: String): Int {

@@ -138,8 +138,8 @@
 
     <TextView
         android:id="@+id/timer_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="59dp"
+        android:layout_height="18dp"
         android:layout_marginBottom="20dp"
         android:text="Таймер:"
         app:layout_constraintBottom_toTopOf="@+id/timer_bar"
@@ -173,12 +173,36 @@
 
     <TextView
         android:id="@+id/timer_count"
-        android:layout_width="5dp"
-        android:layout_height="0dp"
+        android:layout_width="120dp"
+        android:layout_height="19dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/timer_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toEndOf="@+id/timer_label" />
+
+    <Button
+        android:id="@+id/RecorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="48dp"
+        android:text="Рекорди"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/BackToLoginBtn"
+        android:layout_width="109dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="133dp"
+        android:layout_marginEnd="25dp"
+        android:text="Вийти"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.315"
+        app:layout_constraintStart_toEndOf="@+id/theme_checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/RecorBtn"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
